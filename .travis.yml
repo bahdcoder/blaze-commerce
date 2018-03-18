@@ -10,7 +10,7 @@ install:
   - npm install
 
 script: 
-  - adonis test
+  - ENV_SILENT=true adonis test
 
 services:
   - mysql
