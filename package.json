@@ -6,8 +6,11 @@
   "main": "index.js",
   "scripts": {
     "start": "node server.js",
-    "test": "node ace test",
-    "eslint": "eslint ./"
+    "pretest": "npm run lint",
+    "posttest": "npm run coverage",
+    "test": "nyc --silent --reporter=text-lcov node ace test && nyc report",
+    "coverage": "nyc report --reporter=text-lcov | coveralls",
+    "lint": "eslint ./"
   },
   "keywords": [
     "adonisjs",
@@ -29,6 +32,7 @@
     "sqlite3": "^4.0.0"
   },
   "devDependencies": {
+    "coveralls": "^3.0.0",
     "eslint": "^4.19.0",
     "eslint-config-standard": "^11.0.0",
     "eslint-plugin-import": "^2.9.0",

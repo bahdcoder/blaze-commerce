@@ -12,3 +12,5 @@ install:
 script: 
   - ENV_SILENT=true adonis test
   
+after_script:
+  - npm run coverage
