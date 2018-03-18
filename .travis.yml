@@ -3,14 +3,11 @@ language: node_js
 node_js:
   - stable
 
-before_install: 
-  - npm i -g @adonisjs/cli
-
 install:
   - npm install
 
 script: 
-  - ENV_SILENT=true adonis test
+  - ENV_SILENT=true npm test
   
 after_script:
   - npm run coverage
