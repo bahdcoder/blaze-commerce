@@ -11,6 +11,4 @@ install:
 
 script: 
   - ENV_SILENT=true adonis test
-
-services:
-  - mysql
+  
