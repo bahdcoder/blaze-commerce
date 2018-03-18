@@ -18,7 +18,7 @@ test('get list of users', async ({ client }) => {
   response.assertJSONSubset({
     users: [{
       username: 'bahdcoder',
-      email: 'bahdcoder@mail.com',
+      email: 'bahdcoder@mail.com'
     }]
   })
 })
