@@ -14,12 +14,10 @@
 */
 
 const Route = use('Route')
-const User = use('App/Models/User')
 
 Route.get('/', ({ request }) => {
   return { greeting: 'Hello world in JSON' }
 })
 
-Route.get('/travis-test', async ({ response }) => {
-  return { users: await User.all() }
-})
+Route.post('/users/register', 'AuthController.registerUser')
+  .validator('RegisterUser')

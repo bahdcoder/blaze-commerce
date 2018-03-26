@@ -28,6 +28,7 @@
     "@adonisjs/framework": "^5.0.5",
     "@adonisjs/ignitor": "^2.0.6",
     "@adonisjs/lucid": "^5.0.3",
+    "@adonisjs/validator": "^5.0.3",
     "@adonisjs/vow": "^1.0.15",
     "sqlite3": "^4.0.0"
   },
@@ -39,6 +40,7 @@
     "eslint-plugin-node": "^6.0.1",
     "eslint-plugin-promise": "^3.7.0",
     "eslint-plugin-standard": "^3.0.1",
+    "faker": "^4.1.0",
     "nyc": "^11.6.0"
   },
   "autoload": {
