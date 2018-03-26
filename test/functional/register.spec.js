@@ -33,6 +33,8 @@ test('validate user\'s name before registration', async ({ client }) => {
   const response = await client.post('/users/register')
     .send(fakeUser).end()
 
+  response.assertStatus(400)
+
   response.assertJSON({
     errors: [{
       field: 'name',
@@ -49,6 +51,8 @@ test('validate user\'s email before registration', async ({ client }) => {
 
   const response = await client.post('/users/register')
     .send(fakeUser).end()
+
+  response.assertStatus(400)
 
   response.assertJSON({
     errors: [{
@@ -69,6 +73,8 @@ test('validate user\'s email duplicate email before registration', async ({ clie
 
   const response = await client.post('/users/register')
     .send(fakeUser).end()
+
+  response.assertStatus(400)
 
   response.assertJSON({
     errors: [{

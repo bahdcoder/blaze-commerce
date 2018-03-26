@@ -21,3 +21,6 @@ Route.get('/', ({ request }) => {
 
 Route.post('/users/register', 'AuthController.registerUser')
   .validator('RegisterUser')
+
+Route.post('/users/login', 'AuthController.loginUser')
+  .validator('LoginUser')
