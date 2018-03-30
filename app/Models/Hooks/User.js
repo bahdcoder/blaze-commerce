@@ -1,6 +1,7 @@
 'use strict'
 
 const Hash = use('Hash')
+const uuid = require('uuid')
 
 const UserHook = module.exports = {}
 
@@ -17,4 +18,17 @@ UserHook.hashPassword = async (userInstance) => {
   if (userInstance.password) {
     userInstance.password = await Hash.make(userInstance.password)
   }
+}
+
+/**
+ * Set user primary key to uuid.
+ *
+ * @method
+ *
+ * @param  {Object} userInstance
+ *
+ * @return {void}
+ */
+UserHook.setPrimaryKey = async (userInstance) => {
+  userInstance.primaryKeyValue = uuid.v4()
 }

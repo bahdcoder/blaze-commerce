@@ -88,10 +88,10 @@ module.exports = {
   |
   */
   api: {
-    serializer: 'lucid',
-    model: 'App/Models/User',
-    scheme: 'api',
     uid: 'email',
-    password: 'password'
+    scheme: 'api',
+    serializer: 'lucid',
+    password: 'password',
+    model: 'App/Models/User'
   }
 }

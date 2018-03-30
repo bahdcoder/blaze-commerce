@@ -19,6 +19,10 @@ Route.get('/', ({ request }) => {
   return { greeting: 'Hello world in JSON' }
 })
 
+Route.resource('stores', 'StoreController')
+  .apiOnly()
+  .middleware('auth')
+
 Route.post('/users/register', 'AuthController.registerUser')
   .validator('RegisterUser')
 

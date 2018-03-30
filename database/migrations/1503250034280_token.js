@@ -2,7 +2,16 @@
 
 const Schema = use('Schema')
 
+/**
+ * The 'tokens' table schema
+ */
 class TokensSchema extends Schema {
+  /**
+   * Create tokens table
+   * @method up
+   *
+   * @returns {void}
+   */
   up () {
     this.create('tokens', table => {
       table.increments()
@@ -13,7 +22,12 @@ class TokensSchema extends Schema {
       table.timestamps()
     })
   }
-
+  /**
+   * Drop tokens table
+   * @method down
+   *
+   * @returns {void}
+   */
   down () {
     this.drop('tokens')
   }

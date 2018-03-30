@@ -4,6 +4,19 @@
         "use": true
     },
     "rules": {
-        "handle-callback-err": 0
+        "handle-callback-err": 0,
+        "valid-jsdoc": ["error", {
+        "requireReturn": true,
+        "requireReturnType": true,
+        "requireParamDescription": false,
+        "requireReturnDescription": true
+      }],
+      "require-jsdoc": ["error", {
+          "require": {
+              "FunctionDeclaration": true,
+              "MethodDefinition": true,
+              "ClassDeclaration": true
+          }
+      }]
     }
 }

@@ -1,17 +1,13 @@
 'use strict'
 
-const faker = require('faker')
 const User = use('App/Models/User')
-const { test, trait } = use('Test/Suite')('User')
+const generateUser = require('../../helpers/generateUser')
+const { test, trait } = use('Test/Suite')('User Personal access token generation')
 
 trait('Test/ApiClient')
 
 test('login a user and get personal access token', async ({ client, assert }) => {
-  const fakeUser = {
-    name: faker.name.firstName(),
-    email: faker.internet.email(),
-    password: faker.internet.password()
-  }
+  const fakeUser = generateUser()
 
   await User.create(fakeUser)
 
@@ -28,12 +24,10 @@ test('login a user and get personal access token', async ({ client, assert }) =>
 })
 
 test('login a user requires email', async ({ client, assert }) => {
-  const fakeUser = {
-    password: faker.internet.password()
-  }
+  const fakeUser = generateUser()
 
   const response = await client.post('/users/login')
-    .send(fakeUser)
+    .send({ password: fakeUser.password })
     .end()
 
   response.assertStatus(400)
@@ -47,16 +41,12 @@ test('login a user requires email', async ({ client, assert }) => {
 })
 
 test('login failure returns a clear message', async ({ client, assert }) => {
-  const fakeUser = {
-    name: faker.name.firstName(),
-    email: faker.internet.email(),
-    password: faker.internet.password()
-  }
+  const fakeUser = generateUser()
 
   await User.create(fakeUser)
 
   const response = await client.post('/users/login')
-    .send({ email: fakeUser.email, password: faker.internet.password() })
+    .send({ email: fakeUser.email, password: 'WRONG_PASSWORD' })
     .end()
 
   response.assertStatus(401)

@@ -2,7 +2,9 @@
 
 const Model = use('Model')
 
-class Token extends Model {
-}
+/**
+ * The Token model
+ */
+class Token extends Model {}
 
 module.exports = Token
