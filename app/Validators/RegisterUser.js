@@ -11,8 +11,8 @@ class RegisterUser {
    */
   get rules () {
     return {
-      'name': 'required|string',
-      'email': 'required|unique:users',
+      'name': 'required|string|max:40',
+      'email': 'required|unique:users|max:40',
       'password': 'required|min:6|max:30'
     }
   }
@@ -24,7 +24,9 @@ class RegisterUser {
   get messages () {
     return {
       'required': 'The {{ field }} is required.',
-      'email.unique': 'The email has already been taken.'
+      'email.unique': 'The email has already been taken.',
+      'name.max': 'The name must not be longer than 40 characters.',
+      'email.max': 'The email must not be longer than 40 characters.'
     }
   }
 

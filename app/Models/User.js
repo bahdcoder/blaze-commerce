@@ -1,6 +1,7 @@
 'use strict'
 
 const Model = use('Model')
+const StoreNotFoundException = use('App/Exceptions/StoreNotFoundException')
 
 /**
  * The User model
@@ -47,6 +48,25 @@ class User extends Model {
    */
   stores () {
     return this.hasMany('App/Models/Store')
+  }
+
+  /**
+   * Finds the first store owned by this user.
+   * Throws ModelNotFoundException if store was not found.
+   * @param {String} message custom message for exception
+   * @method firstStoreOrFail
+   *
+   * @throws {StoreNotFoundException} if a store was not found
+   * @return {Object} instance of Store
+   */
+  async firstStoreOrFail (message = 'The store was not found.') {
+    const firstStore = await this.stores().first()
+
+    if (!firstStore) {
+      throw new StoreNotFoundException(message, 400)
+    }
+
+    return firstStore
   }
 }
 

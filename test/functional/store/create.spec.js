@@ -4,8 +4,8 @@ const faker = require('faker')
 
 const User = use('App/Models/User')
 const Store = use('App/Models/Store')
+const { generateUser } = require('../../helpers/user')
 const { test, trait } = use('Test/Suite')('Store Create')
-const generateUser = require('../../helpers/generateUser')
 
 trait('Auth/Client')
 trait('Test/ApiClient')

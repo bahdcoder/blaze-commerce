@@ -1,7 +1,7 @@
 'use strict'
 
 const User = use('App/Models/User')
-const generateUser = require('../../helpers/generateUser')
+const { generateUser } = require('../../helpers/user')
 const { test, trait } = use('Test/Suite')('User Personal access token generation')
 
 trait('Test/ApiClient')

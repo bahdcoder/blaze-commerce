@@ -2,8 +2,8 @@
 
 const User = use('App/Models/User')
 const { test, trait } = use('Test/Suite')('Get Store')
-const generateUser = require('../../helpers/generateUser')
-const generateStore = require('../../helpers/generateStore')
+const { generateUser } = require('../../helpers/user')
+const { generateStore } = require('../../helpers/store')
 
 trait('Auth/Client')
 trait('Test/ApiClient')

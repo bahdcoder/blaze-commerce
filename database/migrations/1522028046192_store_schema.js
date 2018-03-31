@@ -15,8 +15,8 @@ class StoreSchema extends Schema {
   up () {
     this.create('stores', (table) => {
       table.string('id')
-      table.string('name')
-      table.string('user_id')
+      table.string('name').notNullable()
+      table.string('user_id').notNullable()
       table.timestamps()
     })
   }

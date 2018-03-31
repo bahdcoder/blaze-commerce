@@ -3,9 +3,9 @@
 const Model = use('Model')
 
 /**
- * Store Model
+ * Product Model
  */
-class Store extends Model {
+class Product extends Model {
   /**
    * Set incrementing to false
    * @returns {bool} false
@@ -19,7 +19,7 @@ class Store extends Model {
    * @returns {Array} hidden model fields
    */
   static get hidden () {
-    return ['user_id', 'created_at', 'updated_at']
+    return ['store_id', 'created_at', 'updated_at']
   }
 
   /**
@@ -29,16 +29,8 @@ class Store extends Model {
   static boot () {
     super.boot()
 
-    this.addHook('beforeCreate', 'StoreHook.setPrimaryKey')
-  }
-
-  /**
-   * A store has many products
-   * @return {Object} relationship
-   */
-  products () {
-    return this.hasMany('App/Models/Product')
+    this.addHook('beforeCreate', 'ProductHook.setPrimaryKey')
   }
 }
 
-module.exports = Store
+module.exports = Product

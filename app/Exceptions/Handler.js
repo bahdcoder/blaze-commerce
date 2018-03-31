@@ -20,11 +20,11 @@ class ExceptionHandler {
    */
   async handle (error, { request, response }) {
     if (error.name === 'InvalidApiToken') {
-      return response.status(401)
+      return response.status(error.status)
         .json({ message: 'The api token is missing or invalid.' })
     }
 
-    response.status(error.status).send(error.message)
+    response.status(error.status).send({ message: error.message })
   }
 
   /**
