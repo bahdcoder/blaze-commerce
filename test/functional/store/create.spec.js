@@ -4,6 +4,7 @@ const faker = require('faker')
 
 const User = use('App/Models/User')
 const Store = use('App/Models/Store')
+const slugify = require('../../helpers/slugify')
 const { generateUser } = require('../../helpers/user')
 const { test, trait } = use('Test/Suite')('Store Create')
 
@@ -26,7 +27,8 @@ test('a user can create a store', async ({ assert, client }) => {
   response.assertStatus(201)
 
   response.assertJSONSubset({
-    name: fakeStore.name
+    name: fakeStore.name,
+    slug: slugify(fakeStore.name)
   })
 
   const {

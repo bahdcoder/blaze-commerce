@@ -16,7 +16,9 @@ class ProductSchema extends Schema {
     this.create('products', (table) => {
       table.string('id')
       table.string('name').notNullable()
+      table.string('slug').notNullable()
       table.string('store_id').notNullable()
+      table.boolean('live').defaultTo(false)
       table.integer('price').notNullable()
       table.text('description').notNullable()
       table.bool('digital').defaultTo(false)

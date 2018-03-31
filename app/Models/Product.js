@@ -30,6 +30,13 @@ class Product extends Model {
     super.boot()
 
     this.addHook('beforeCreate', 'ProductHook.setPrimaryKey')
+
+    this.addTrait('@provider:Lucid/Slugify', {
+      fields: {
+        slug: 'name'
+      },
+      strategy: 'dbIncrement'
+    })
   }
 }
 

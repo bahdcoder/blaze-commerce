@@ -52,7 +52,7 @@ Route.resource('products', 'ProductController')
 |
 */
 Route.post('/stores/:storeId/products', 'ProductController.storeByStoreId')
-  .middleware('auth')
+  .middleware(['auth', 'findStore', 'authorizeStoreAction'])
   .validator('CreateProduct')
 /*
 |--------------------------------------------------------------------------

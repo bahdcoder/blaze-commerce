@@ -2,6 +2,7 @@
 
 const faker = require('faker')
 const Product = use('App/Models/Product')
+const slugify = require('../../helpers/slugify')
 const { createStore } = require('../../helpers/store')
 const { test, trait } = use('Test/Suite')('Create Products')
 const { generateProduct } = require('../../helpers/product')
@@ -20,6 +21,7 @@ test('a user can create a product', async ({ assert, client }) => {
   response.assertStatus(200)
   response.assertJSONSubset({
     name: fakeProduct.name,
+    slug: slugify(fakeProduct.name),
     description: fakeProduct.description,
     price: fakeProduct.price,
     digital: fakeProduct.digital
@@ -195,6 +197,32 @@ test('if user provides store in url, that store should be used', async ({ assert
   response.assertStatus(200)
   response.assertJSONSubset({
     name: fakeProduct.name,
+    slug: slugify(fakeProduct.name),
+    description: fakeProduct.description,
+    price: fakeProduct.price,
+    digital: fakeProduct.digital
+  })
+
+  const product = await Product.find(response.body.id)
+  assert.equal(product.store_id, store.id)
+})
+
+test('if user provides store in url, the additional parameters passed into request should be ignored', async ({ assert, client }) => {
+  const fakeProduct = await generateProduct()
+  const { user } = await createUserWithStore()
+
+  const store = await createStore(user)
+
+  fakeProduct.number = faker.random.number()
+  fakeProduct.username = faker.lorem.words(2)
+
+  const response = await client.post(`/stores/${store.id}/products`)
+    .loginVia(user, 'api').send(fakeProduct).end()
+
+  response.assertStatus(200)
+  response.assertJSONSubset({
+    name: fakeProduct.name,
+    slug: slugify(fakeProduct.name),
     description: fakeProduct.description,
     price: fakeProduct.price,
     digital: fakeProduct.digital
@@ -216,6 +244,25 @@ test('if user provides store in url, user should be owner of the store', async (
   response.assertStatus(401)
   response.assertJSON({
     message: 'Unauthorized to make changes to this store.'
+  })
+})
+
+test('if user passes in additional parameters, these should be ignored by server', async ({ assert, client }) => {
+  const fakeProduct = await generateProduct()
+  const { user } = await createUserWithStore()
+
+  fakeProduct.sku = faker.lorem.sentence()
+  fakeProduct.phone = faker.random.number()
+
+  const response = await client.post('/products')
+    .loginVia(user, 'api').send(fakeProduct).end()
+
+  response.assertStatus(200)
+  response.assertJSONSubset({
+    name: fakeProduct.name,
+    description: fakeProduct.description,
+    price: fakeProduct.price,
+    digital: fakeProduct.digital
   })
 })
 

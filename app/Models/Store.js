@@ -30,6 +30,13 @@ class Store extends Model {
     super.boot()
 
     this.addHook('beforeCreate', 'StoreHook.setPrimaryKey')
+
+    this.addTrait('@provider:Lucid/Slugify', {
+      fields: {
+        slug: 'name'
+      },
+      strategy: 'dbIncrement'
+    })
   }
 
   /**
